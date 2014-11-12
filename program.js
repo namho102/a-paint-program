@@ -242,3 +242,15 @@ function rectangleFrom(a, b) {
       document.body.removeChild(trackingNode);
     });
   };
+  
+   function colorAt(cx, x, y) {
+    var pixel = cx.getImageData(x, y, 1, 1).data;
+    return "rgb(" + pixel[0] + ", " + pixel[1] + ", " + pixel[2] + ")";
+  }
+
+  tools["Pick color"] = function(event, cx) {
+    var pos = relativePos(event, cx.canvas);
+    var color = colorAt(cx, pos.x, pos.y);
+    cx.fillStyle = color;
+    cx.strokeStyle = color;
+  };
